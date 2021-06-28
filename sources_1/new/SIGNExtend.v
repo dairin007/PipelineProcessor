@@ -3,9 +3,9 @@
 // Company:
 // Engineer:
 //
-// Create Date: 2021/04/09 10:59:03
+// Create Date: 2021/04/16 00:12:55
 // Design Name:
-// Module Name: L2SHIFT2
+// Module Name: SignExtend
 // Project Name:
 // Target Devices:
 // Tool Versions:
@@ -20,11 +20,16 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
+module Extend(
+    in,out
+    );
+    input [15:0] in;
+    output [31:0] out;
 
-module L2SHIFT(in,out);
+    assign out={in[15],in[15],in[15],in[15],in[15],
+                in[15],in[15],in[15],in[15],in[15],
+                in[15],in[15],in[15],in[15],in[15],in[15],
+                in[15:0]
+    };
 
-  input wire [31:0] in;
-  output wire [31:0] out;
-
-  assign out={in[29:0],2'b00};
 endmodule

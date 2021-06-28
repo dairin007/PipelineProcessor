@@ -3,9 +3,9 @@
 // Company:
 // Engineer:
 //
-// Create Date: 2021/04/08 14:57:19
+// Create Date: 2021/04/15 18:04:31
 // Design Name:
-// Module Name: HA
+// Module Name: Half_Adder
 // Project Name:
 // Target Devices:
 // Tool Versions:
@@ -21,10 +21,9 @@
 
 
 module HA(a,b,s,c);
+    input a,b;
+    output s,c;
 
-  input a,b;
-  output s,c;
-
-  assign s=a^b;
-  assign c=a&b;
+    assign s=a^b;
+    assign c=a&b;
 endmodule

@@ -3,9 +3,9 @@
 // Company:
 // Engineer:
 //
-// Create Date: 2021/04/13 16:07:58
+// Create Date: 2021/04/15 23:31:35
 // Design Name:
-// Module Name: HAZARD_UNIT
+// Module Name: Hazard_unit
 // Project Name:
 // Target Devices:
 // Tool Versions:
@@ -20,11 +20,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module HAZARD_UNIT(ID_EXMemRead,ID_EXRegisterRt,Inst,Hazard);
-  input ID_EXMemRead;
-  input [31:0] Inst;
-  input [4:0] ID_EXRegisterRt;
-  output Hazard;
-
-  assign Hazard=(ID_EXMemRead&((ID_EXRegisterRt==Inst[25:21])|(ID_EXRegisterRt==Inst[20:16])))?1:0;
+module Hazard_unit(
+    EX_MemRead,EX_order,ID_order,hazard
+    );
+input EX_MemRead;
+input [31:0] EX_order,ID_order;
+output hazard;
+  assign hazard=EX_MemRead&((EX_order[20:16]==ID_order[25:21])|(EX_order[20:16]==ID_order[20:16]));
 endmodule

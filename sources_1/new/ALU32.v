@@ -3,9 +3,9 @@
 // Company:
 // Engineer:
 //
-// Create Date: 2021/04/04 20:37:39
+// Create Date: 2020/04/06 16:33:06
 // Design Name:
-// Module Name: ALU32
+// Module Name: alu32
 // Project Name:
 // Target Devices:
 // Tool Versions:
@@ -21,7 +21,6 @@
 
 
 module ALU32(ALUctl,a,b,ALUout,Zero);
-
   input [3:0] ALUctl;
   input  [31:0] a,b;
   output  [31:0] ALUout;
@@ -38,9 +37,6 @@ module ALU32(ALUctl,a,b,ALUout,Zero);
     end
   endgenerate
   ALUMSB alumsb(ALUctl,a[31],b[31],c_out[30],1'b0,ALUout[31],set,overflow);
-
   assign Zero=~|ALUout;
 
 endmodule
-
-

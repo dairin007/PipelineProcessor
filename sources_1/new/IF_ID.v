@@ -3,7 +3,7 @@
 // Company:
 // Engineer:
 //
-// Create Date: 2021/04/13 14:07:55
+// Create Date: 2020/04/09 19:53:31
 // Design Name:
 // Module Name: IF_ID
 // Project Name:
@@ -20,17 +20,20 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module IF_ID(clk,IF_IDFlash,Hazard,PCIn,InstIn,PCOut,InstOut);
-
+module IF_ID(clk,IF_IDFlash,PCIn,OrderIn,Hazard,PCOut,OrderOut);
   input clk,IF_IDFlash,Hazard;
-  input [31:0] PCIn,InstIn;
-  output reg [31:0] PCOut,InstOut;
+  input [31:0] PCIn,OrderIn;
+  output reg [31:0] PCOut,OrderOut;
 
-  always @(posedge clk) begin
-    if(Hazard==0) begin
-      PCOut  <=(IF_IDFlash==1'b1)?32'b0:PCIn;
-      InstOut<=(IF_IDFlash==1'b1)?32'b0:InstIn;
-    end
+  initial begin
+    PCOut=32'b0;
+    OrderOut=32'b0;
   end
 
+  always @(posedge clk)begin
+    if(Hazard==1'b0)begin
+      PCOut   <=(IF_IDFlash==1'b1)?32'b0:PCIn;
+      OrderOut<=(IF_IDFlash==1'b1)?32'b0:OrderIn;
+    end
+  end
 endmodule

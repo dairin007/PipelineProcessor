@@ -3,9 +3,9 @@
 // Company:
 // Engineer:
 //
-// Create Date: 2021/04/08 10:59:52
+// Create Date: 2021/04/15 18:02:28
 // Design Name:
-// Module Name: Mux5b
+// Module Name: pipe_tb
 // Project Name:
 // Target Devices:
 // Tool Versions:
@@ -20,11 +20,16 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module MUX5b(ctl,a,b,out);
-
-  input ctl;
-  input [4:0] a,b;
-  output [4:0] out;
-
-  assign out=(ctl)?b:a;
+module pipe_tb();
+    reg clk=0,rst=1;
+    Pipeline Pipeline(clk,rst);
+    initial begin
+        #50
+        rst<=0;
+        #7000
+        $finish;
+    end
+    always #50 begin
+       clk<=~clk;
+    end
 endmodule

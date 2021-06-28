@@ -3,9 +3,9 @@
 // Company:
 // Engineer:
 //
-// Create Date: 2021/04/09 11:06:11
+// Create Date: 2020/04/06 11:32:41
 // Design Name:
-// Module Name: PC
+// Module Name: PC_CTRL32
 // Project Name:
 // Target Devices:
 // Tool Versions:
@@ -20,29 +20,30 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module IF(clk,rst,PCSrc,Hazard,IFMux0,IF_IDIn);
 
-  input clk,rst,PCWrite,PCSrc;
-  input [31:0] IFMux0;
-  output [31:0] IF_IDIn;
+module IF(clk,rst,to_mux1,ALUOut,Flag,Jump,Hazard,Order,FAOut);
+  input clk,rst,Jump,Flag,Hazard;
+  input [31:0] ALUOut,to_mux1;
+  output [31:0] Order,FAOut;
 
-  reg [31:0] PC=32'b0;
+  reg [31:0]PC=0;
   wire [31:0] PCOut;
   wire [31:0] FAOut;
-  wire [31:0] ToPC;
+  wire [31:0] to_mux2,ToPC;
+
+
+  FA32 fa(PCOut,4,FAOut);
+  INST_MEM inst_mem(PCOut,Order);
+  MUX mux1(Flag,FAOut,ALUOut,to_mux2);
+  MUX mux2(Jump,to_mux2,to_mux1,ToPC);
+
+
   assign PCOut=PC;
-
-  MUX32b mux(PCSrc,InMux0,FAOut,ToPC);
-  FA32 fa1(PCOut,32'd4,FAOut);
-  INST_MEM inst_mem(PCOut,IF_IDIn);
-
-  always @(posedge clk) begin
-    if(rst==1) begin
-      PCOut<=32'b0;
-    end else begin
-      PC<=(Hazard==0)?ToPC:PC;
-    end
+  always @(posedge clk)begin
+      if(rst==1'b1)
+          PC<=32'b0;
+      else
+        PC<=(Hazard==1'b0)?ToPC:PC;
   end
-
 
 endmodule

@@ -3,9 +3,9 @@
 // Company:
 // Engineer:
 //
-// Create Date: 2021/04/08 14:49:13
+// Create Date: 2020/04/05 20:29:40
 // Design Name:
-// Module Name: FA32
+// Module Name: Full_Adder32
 // Project Name:
 // Target Devices:
 // Tool Versions:
@@ -30,7 +30,8 @@ module FA32(a,b,s);
   HA ha(a[0],b[0],s[0],c[0]);
   generate
     genvar i;
-    for(i=0;i<=30;i=i+1)
+    for(i=0;i<=30;i=i+1) begin
       FA fa(a[i+1],b[i+1],c[i],s[i+1],c[i+1]);
+    end
   endgenerate
 endmodule

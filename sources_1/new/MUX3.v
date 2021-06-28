@@ -3,9 +3,9 @@
 // Company:
 // Engineer:
 //
-// Create Date: 2021/04/07 17:45:15
+// Create Date: 2021/04/19 00:05:12
 // Design Name:
-// Module Name: MUX2
+// Module Name: MUX3
 // Project Name:
 // Target Devices:
 // Tool Versions:
@@ -20,12 +20,14 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module MUX32b(ctl,a,b,out);
+module MUX3(
+  flag,data0,data1,data2,out
+    );
+    input [1:0] flag;
+    input [31:0] data0,data1,data2;
+    output [31:0] out;
 
-  input ctl;
-  input [31:0] a,b;
-  output [31:0] out;
-
-  assign out=(ctl)?b:a;
-
+  assign out=(flag==2'b00)?data0:
+              (flag==2'b01)?data1:
+              (flag==2'b10)?data2:0;
 endmodule

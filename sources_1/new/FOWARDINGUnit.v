@@ -3,9 +3,9 @@
 // Company:
 // Engineer:
 //
-// Create Date: 2021/04/14 01:59:09
+// Create Date: 2020/04/10 15:44:58
 // Design Name:
-// Module Name: FORWARDING_UNIT
+// Module Name: Forwarding_Unit
 // Project Name:
 // Target Devices:
 // Tool Versions:
@@ -20,8 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-
-module FORWARDING_UNIT(ID_EXRegisterRs,ID_EXRegisterRt,
+module ForwardingUnit(ID_EXRegisterRs,ID_EXRegisterRt,
 EX_MEMRegWrite,MEM_WBRegWrite,EX_MEMRegisterRd,MEM_WBRegisterRd,
 EXForwardOut1,EXForwardOut2);
 

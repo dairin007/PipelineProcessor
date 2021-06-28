@@ -3,9 +3,9 @@
 // Company:
 // Engineer:
 //
-// Create Date: 2021/04/06 13:17:45
+// Create Date: 2020/04/07 11:51:28
 // Design Name:
-// Module Name: DATAMEM
+// Module Name: data_Mem
 // Project Name:
 // Target Devices:
 // Tool Versions:
@@ -20,31 +20,25 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-
-module DATAMEM(clk,MemWrite,MemRead,Address,WriteData,Data );
-
-  input clk,MemWrite,MemRead;
-  input [31:0] Address,WriteData;
+module Memory(clk,Address,WriteData,MemWrite,MemRead,Data);
+  input MemWrite,MemRead,clk;
+  input[31:0] Address,WriteData;
   output [31:0] Data;
 
-  reg [31:0] Mem [31:0];
+  reg [31:0] Mem [3:0];
 
   integer i;
   initial begin
-    for(i=0;i<=31;i=i+1) begin
-      Mem[i]<= 32'b00000000000000000000000000000000;
+    for(i=0;i<=31;i=i+1)begin
+        Mem[i]=32'b0;
     end
-      Mem[1]<=32'b00000000000000000000000000000001;
-      Mem[2]<=32'd11;
+    Mem[1]=32'b1;
+    Mem[2]=32'd11;
   end
 
-  always @(posedge clk) begin
-    if(MemWrite==1) begin
+  always @(posedge clk)begin
+      if(MemWrite==1)
       Mem[Address]<=WriteData;
-    end
   end
-
-  assign Data=(MemRead==1)?Mem[Address]:0;
-
-
+  assign Data=(MemRead==1'b1)?Mem[Address]:32'b0;
 endmodule

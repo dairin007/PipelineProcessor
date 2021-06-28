@@ -3,9 +3,9 @@
 // Company:
 // Engineer:
 //
-// Create Date: 2021/04/06 14:17:49
+// Create Date: 2020/04/06 11:20:06
 // Design Name:
-// Module Name: SIGNEX
+// Module Name: mux
 // Project Name:
 // Target Devices:
 // Tool Versions:
@@ -20,14 +20,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module SIGNEX(in,out);
-  input [15:0] in;
-  output [31:0] out;
-
-  assign out={in[15],in[15],in[15],in[15],in[15],
-              in[15],in[15],in[15],in[15],in[15],
-              in[15],in[15],in[15],in[15],in[15],in[15],
-              in[15:0]
-  };
-
+module MUX(flag,a,b,res);
+    input [31:0]a,b;
+    input flag;
+    output [31:0]res;
+    assign res=(flag)?b:a;
 endmodule
